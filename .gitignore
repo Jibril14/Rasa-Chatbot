@@ -1,0 +1,13 @@
+*.log
+__pycache__/
+*.py[cod]
+*$py.class
+.env
+.cache/
+build/
+results/*
+.DS_Store
+venv
+.rasa
+models/
+
