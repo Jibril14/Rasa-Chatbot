@@ -28,3 +28,8 @@ stories:
   - action: utter_did_that_help
   - intent: deny
   - action: utter_goodbye
+
+- story: anything thanks
+  steps:
+  - intent: thanks # never imported this but still able to call it here
+  - action: utter_thanks

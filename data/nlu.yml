@@ -89,3 +89,10 @@ nlu:
     - are you a human?
     - am I talking to a bot?
     - am I talking to a human?
+
+- intent: thanks
+  examples: | # give some training examples
+    - thanks wasiu
+    - thank you very much!
+    - appreciate
+    - thanks for your patronage
