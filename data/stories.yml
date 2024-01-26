@@ -33,3 +33,8 @@ stories:
   steps:
   - intent: thanks # never imported this but still able to call it here
   - action: utter_thanks
+
+- story: order iphone
+  steps:
+  - intent: order_iphone
+  - action: utter_order_iphone

@@ -96,3 +96,12 @@ nlu:
     - thank you very much!
     - appreciate
     - thanks for your patronage
+
+
+- intent: order_iphone
+  examples: |
+    - Hi, I'm looking to buy a new [iphone](phone)
+    - I want an [iphone](phone) with a good camera
+    - I want to order an [iphone](phone)
+    - can I get an [iphone](phone) with long battery life
+    - Do you sell an [iphone](phone)

@@ -5,11 +5,16 @@
 
 # Workflow
 
+# nlu.yml
+
 - We define an intent (eg thank) in nlu.yml, then we give examples(training data), this is a write up 
 patterns we want our model to recognise eg thank you, appreciate, many thanks
+
+# domain.yml
 - Then here we bring a list of all intents as they are in nlu.yml. We also define a list of responses
  here too. The domain.yml is like where the bot stores text(response)
-
+- other components in here are: actions, slots, forms, templates
+# stories.yml
 - stories.yml has two keys intent: greet & action: utter_greet (we call out intents as define in nlu.yml and
  responses has define in domain.yml). stories.yml is use to define the conversational flow of 
  chatbot(intent & values).  map the response to an intent and trigger it. here we call 

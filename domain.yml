@@ -9,7 +9,11 @@ intents:
   - mood_unhappy
   - bot_challenge
   - thanks
+  - order_iphone
 
+  
+entities: # This param is define cus: I'm using entities ie [iphone](phone)
+  - phone # most be name phone
 
 responses:
   utter_greet:
@@ -33,6 +37,9 @@ responses:
 
   utter_thanks: # most start with utter. else I have to create a custom action
   - text: "You are welcome, it was my pleasure to assist you"
+
+  utter_order_iphone:
+  - text: "Sure we sell different models of iphones. Would you like more details"
 
 session_config:
   session_expiration_time: 60 # this mean session will expire after 6os of no user interaction
