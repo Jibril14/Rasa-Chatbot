@@ -10,10 +10,15 @@ intents:
   - bot_challenge
   - thanks
   - order_iphone
+  - order_samsung
 
   
 entities: # This param is define cus: I'm using entities ie [iphone](phone)
   - phone # most be name phone
+
+actions:
+  - action_extract_iphone_entity
+  - action_extract_samsung_entity
 
 responses:
   utter_greet:

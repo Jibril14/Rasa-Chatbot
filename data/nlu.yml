@@ -105,3 +105,12 @@ nlu:
     - I want to order an [iphone](phone)
     - can I get an [iphone](phone) with long battery life
     - Do you sell an [iphone](phone)
+
+
+- intent: order_samsung
+  examples: |
+    - Hi, I'm looking to buy a new [samsung](phone)
+    - I want a [samsung](phone) s series with a good camera
+    - I want to order a [samsung](phone) android phone
+    - can I get an [samsung](phone) with long battery life
+    - Do you sell a [samsung](phone) smart phone

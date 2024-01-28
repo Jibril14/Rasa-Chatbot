@@ -23,3 +23,18 @@ E.g Utterances that contain certain words
 - regex: hours
   examples: |
     - \bopen\b
+
+
+# Intent Recognition & Entity Extraction
+- Intent Recognition & Entity Extraction
+Book a flight for three people in Abuja at the Emirate airline on Monday
+Intent: "flight_reservation"
+number_of_people: "Abuja"
+location: "Abuja"
+date: "Monday
+
+- We already have some entities define in our training label
+- The action.py file is use to define custom actions, action are use to implement logic and perform actions base on user input(input, intent & entities)
+
+we enable actions in the endpoints.yml
+and run: rasa run actions
