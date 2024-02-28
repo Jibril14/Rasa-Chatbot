@@ -418,3 +418,9 @@ yarl                              1.9.3
 zict                              3.0.0
 zipp                              3.17.0
 zope.interface                    5.4.0
+
+
+fastapi==0.104.0
+uvicorn==0.20.0
+jinja2==3.0.0
+python-multipart==0.0.6
