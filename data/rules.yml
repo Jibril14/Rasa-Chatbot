@@ -29,3 +29,15 @@ rules:
     - requested_slot: null  # all the slots have been flled, continue to action below
   - action: utter_action_submit
   - action: utter_laptop_slots
+
+- rule: Interuption in First laptop Form ## chatting wrongly during form interaction
+  condition:
+# Condition that form is active
+  - active_loop: first_laptop_form
+  steps:
+# This is unhappy path case handling (particularly when user trigger bot_challenge intent)
+  - intent: bot_challenge ## e.g are you a bot
+  - action: utter_iambot
+# Return to form after handling the `bot_challenge` intent
+  - action: first_laptop_form
+  - active_loop: first_laptop_form # recover to form after handling the interuption

@@ -79,11 +79,11 @@ responses:
   utter_laptop_slots:
   - text: I will order a {laptop_os} {laptop_brand} {laptop_processor} laptop.
 
-  utter_ask_continue:
+  utter_ask_continue: # not using this in form basic commit
   - text: Are you sure you want to stop the form?
 
   utter_action_submit: # response them self are still actions(see that I specified them inside actions: key)
-  - text: Are you sure you want to stop the form?
+  - text: Are you sure you your selection as ok?
 
   utter_ask_laptop_os:
   - text: What laptop operating system are you looking for
