@@ -24,6 +24,8 @@ E.g Utterances that contain certain words
   examples: |
     - \bopen\b
 
+- always omit or dont use entities that are had to detect
+- all your entity should live in a place in nlu.yml ie define them in one place (check 9:10 form basic)
 
 # Intent Recognition & Entity Extraction
 - Intent Recognition & Entity Extraction

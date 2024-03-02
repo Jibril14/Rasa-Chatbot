@@ -10,4 +10,4 @@ results/*
 venv
 .rasa
 models/
-
+story_graph.dot

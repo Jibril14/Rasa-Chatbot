@@ -81,9 +81,9 @@ entities:
 - entity_name
 slots:
     slot_name:
-        type: any
+        type: any # type here means actual value type e.g integer, a string
         mappings:
-        - type: from_entity # slot will be fill in with value from entity
+        - type: from_entity # slot will be fill in with value from entity (slot type: weather from entities, user text etc)
           entity: entity_name
           role: role_name
           group: group_name

@@ -37,8 +37,8 @@ stories:
 - story: order phone
   steps:
   - intent: order_iphone
-  # - action: utter_order_iphone # remove this, since we now have a custom action(we now not calling 
-  # static response from domain.yml file. rather from action file)
-  - action: action_extract_iphone_entity # return: You have selected iphone variant. this is from the name method of action file
+  # remove this, since we now have a custom action(we now not calling static response from domain.yml file. rather from action file)
+  # - action: utter_order_iphone
+  - action: action_extract_iphone_entity # this is from the name method of action file. return: You have selected iphone variant.
   - intent: order_samsung
   - action: action_extract_samsung_entity

@@ -114,3 +114,41 @@ nlu:
     - I want to order a [samsung](phone) android phone
     - can I get an [samsung](phone) with long battery life
     - Do you sell a [samsung](phone) smart phone
+
+
+- intent: buy_laptop
+  examples: |
+    - I want to buy a laptop
+    - I want to buy a pc
+    - I want to buy a personal computer
+    - I want a laptop
+    - I want a system
+    - i'd like to buy a laptop computer
+    - I want to order a new system
+    - do you sell a laptop computer
+    - can i order a computer laptop
+
+- intent: inform_laptop
+  examples: |
+    - i'd like to buy a [windows](laptop_os) laptop 
+    - I want to buy a [macbook](laptop_os) laptop computer
+    - I want a [mac](laptop_os) laptop
+    - I want to order a [linux](laptop_os) laptop
+
+    - I want an [hp](laptop_brand) laptop
+    - can i order a [hp](laptop_brand) computer laptop
+    - i'd like to buy a [dell](laptop_brand) laptop
+    - I want to buy a [lenovo](laptop_brand) laptop computer
+    - I want a [apple](laptop_brand) laptop
+    - I want to order a new [apple](laptop_brand) system
+    - i'd like to buy an [alienware](laptop_brand)
+    - i want [alienware](laptop_brand) laptop computer
+    - [asus](laptop_brand)
+
+    - i'd like to buy an [intel celeron](laptop_processor) laptop
+    - I want to buy a [intel core i5](laptop_processor) laptop computer
+    - I want a [intel core i7](laptop_processor) laptop
+    - I want to buy a laptop with [intel core i9](laptop_processor) processors
+    - I want to order a new [intel core i3](laptop_processor) system
+    - i'd like to buy an [apple m2](laptop_processor) laptop
+    - can i order [apple m2 pro](laptop_processor)

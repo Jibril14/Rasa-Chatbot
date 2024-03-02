@@ -11,3 +11,21 @@ rules:
   steps:
   - intent: bot_challenge
   - action: utter_iamabot
+
+
+- rule: Activate Laptop Form
+  steps:
+  - intent: buy_laptop # may use inform_laptop too especially since it the one that specify entities
+  - action: first_laptop_form # defined in domain.yml file
+  - active_loop: first_laptop_form
+
+- rule: Submit Laptop Form
+  condition:
+  - active_loop: first_laptop_form
+  steps:
+  - action: first_laptop_form
+  - active_loop: null # slots have not been filled
+  - slot_was_set:
+    - requested_slot: null  # all the slots have been flled, continue to action below
+  - action: utter_action_submit
+  - action: utter_laptop_slots

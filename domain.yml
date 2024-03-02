@@ -11,14 +11,43 @@ intents:
   - thanks
   - order_iphone
   - order_samsung
+  - buy_laptop
+  - inform_laptop
 
   
 entities: # This param is define cus: I'm using entities ie [iphone](phone)
   - phone # most be name phone
+  - laptop_os
+  - laptop_brand
+  - laptop_processor
 
-actions:
-  - action_extract_iphone_entity
-  - action_extract_samsung_entity
+
+slots:
+  laptop_os: # naming convetion that the slot is named same as the entity it get it value from
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: laptop_os # as defined in the entities: key
+  laptop_brand:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: laptop_brand
+  laptop_processor:
+    type: text
+    influence_conversation: true
+    mappings:
+    - type: from_entity
+      entity: laptop_processor
+
+forms: # form themself are still actions(see that I specified them as action inside rules.yml)
+  first_laptop_form: # this was use in rule.yml
+    required_slots: # as defined in the slots: key
+      - laptop_os
+      - laptop_brand
+      - laptop_processor
 
 responses:
   utter_greet:
@@ -40,11 +69,43 @@ responses:
   utter_iamabot:
   - text: "I am a bot, powered by Rasa."
 
-  utter_thanks: # most start with utter. else I have to create a custom action
+  utter_thanks: # must start with utter most not end with intent name. else I have to create a custom action
   - text: "You are welcome, it was my pleasure to assist you"
 
   utter_order_iphone:
   - text: "Sure we sell different models of iphones. Would you like more details"
+
+  # Response related to laptop
+  utter_laptop_slots:
+  - text: I will order a {laptop_os} {laptop_brand} {laptop_processor} laptop.
+
+  utter_ask_continue:
+  - text: Are you sure you want to stop the form?
+
+  utter_action_submit: # response them self are still actions(see that I specified them inside actions: key)
+  - text: Are you sure you want to stop the form?
+
+  utter_ask_laptop_os:
+  - text: What laptop operating system are you looking for
+
+  utter_ask_laptop_brand: # Not using this yet
+  - text: What laptop brand do you want to buy
+
+  utter_ask_laptop_processor:
+  - text: Which processor type are you looking at (e.g intel core i5, intel core i7)
+
+actions: # All this are essentially classes from action file
+  - action_extract_iphone_entity
+  - action_extract_samsung_entity
+  # related to laptop
+  - utter_ask_continue
+  - utter_laptop_slots
+  - utter_ask_laptop_os
+  - utter_ask_laptop_brand
+  - utter_ask_laptop_processor
+  - utter_action_submit
+  - validate_first_laptop_form # coming from action.py
+
 
 session_config:
   session_expiration_time: 60 # this mean session will expire after 6os of no user interaction
