@@ -13,14 +13,14 @@ intents:
   - order_samsung
   - buy_laptop
   - inform_laptop
-
+  - stop
   
 entities: # This param is define cus: I'm using entities ie [iphone](phone)
   - phone # most be name phone
   - laptop_os
   - laptop_brand
   - laptop_processor
-
+  # - requested_slot
 
 slots:
   laptop_os: # naming convetion that the slot is named same as the entity it get it value from
@@ -29,6 +29,10 @@ slots:
     mappings:
     - type: from_entity
       entity: laptop_os # as defined in the entities: key
+      conditions: # another unhappy path case taking care of. assuming form is not active. The word 'windows' will
+#  normally trigger inform_laptop intent, and also try to collect it slot "windows", remember inform_laptop trigers the form.
+      - active_loop: first_laptop_form #if a user chitchat with "my windows are open" we dont want bot to collect windows as a slot entity
+        requested_slot: laptop_os # What we do here is to make the slot, to be availabe only when first_laptop_form is active
   laptop_brand:
     type: text
     influence_conversation: true
@@ -79,11 +83,11 @@ responses:
   utter_laptop_slots:
   - text: I will order a {laptop_os} {laptop_brand} {laptop_processor} laptop.
 
-  utter_ask_continue: # not using this in form basic commit
+  utter_ask_continue:
   - text: Are you sure you want to stop the form?
 
   utter_action_submit: # response them self are still actions(see that I specified them inside actions: key)
-  - text: Are you sure you your selection as ok?
+  - text: Are you sure your selection are ok?
 
   utter_ask_laptop_os:
   - text: What laptop operating system are you looking for
@@ -93,6 +97,7 @@ responses:
 
   utter_ask_laptop_processor:
   - text: Which processor type are you looking at (e.g intel core i5, intel core i7)
+
 
 actions: # All this are essentially classes from action file
   - action_extract_iphone_entity

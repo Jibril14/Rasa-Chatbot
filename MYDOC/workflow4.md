@@ -23,7 +23,7 @@ user: big
 ## To configure a form in rasa we need to set two rules, one rule to
 # activate the form and another rule to deactivate it 
 
-## Wrong slot specify by user
+## Wrong slot specify by use
 user: I want to buy pizza
 bot: What kind of pizza?
 user: fruit----------------------------invalid entity

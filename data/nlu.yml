@@ -152,3 +152,9 @@ nlu:
     - I want to order a new [intel core i3](laptop_processor) system
     - i'd like to buy an [apple m2](laptop_processor) laptop
     - can i order [apple m2 pro](laptop_processor)
+
+- intent: stop
+  examples: |
+    - stop the order
+    - i want to stop the form
+    - i am cancelling my order. pls stop

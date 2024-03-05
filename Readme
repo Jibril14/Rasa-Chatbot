@@ -32,3 +32,6 @@ been filled
 - action: utter_laptop_slots
 
 # the above only worked on rasa interactive & not in rasa shell
+# coversation path define in story file can be tested through the rasa shell
+# At this point the happy path defined inside rule.yml file work fine, but those in the story file 
+# didnot (Some actions where not triggering)
