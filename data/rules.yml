@@ -13,32 +13,38 @@ rules:
   - action: utter_iamabot
 
 
+# - rule: Activate Laptop Form
+#   steps:
+#   - intent: buy_laptop # may use inform_laptop too especially since it the one that specify entities
+#   - action: first_laptop_form # defined in domain.yml file
+#   - active_loop: first_laptop_form
+
+# - rule: Submit Laptop Form
+#   condition:
+#   - active_loop: first_laptop_form
+#   steps:
+#   - action: first_laptop_form
+#   - active_loop: null # slots have not been filled
+#   - slot_was_set:
+#     - requested_slot: null  # all the slots have been flled, continue to action below
+#   - action: utter_action_submit
+#   - action: utter_laptop_slots
+
+
 - rule: Activate Laptop Form
   steps:
-  - intent: buy_laptop # may use inform_laptop too especially since it the one that specify entities
-  - action: first_laptop_form # defined in domain.yml file
-  - active_loop: first_laptop_form
+  - intent: buy_laptop #if this intent is trigger, run the 2nd form, this form in turn collect all slots from inform_laptop intent
+  - action: second_laptop_form
+  - active_loop: second_laptop_form
+  # - action: action_ask_laptop_touch_screen
 
 - rule: Submit Laptop Form
   condition:
-  - active_loop: first_laptop_form
+  - active_loop: second_laptop_form
   steps:
-  - action: first_laptop_form
+  - action: second_laptop_form
   - active_loop: null # slots have not been filled
   - slot_was_set:
     - requested_slot: null  # all the slots have been flled, continue to action below
   - action: utter_action_submit
   - action: utter_laptop_slots
-
-# - rule: Interuption in First laptop Form ## chatting wrongly during form interaction
-#   condition:
-# # Condition that form is active
-#   - active_loop: first_laptop_form
-#   steps:
-# # This is unhappy path case handling (particularly when user trigger bot_challenge intent)
-#   - intent: bot_challenge ## e.g are you a bot
-#   - action: utter_iamabot ##  I like that i can call utterance utter_iamabot(which is a string in domain.yml) here as
-#     # an action, ie I never specify it under any action unlike I some where specify under action: in domain.yml
-# # Return to form after handling the `bot_challenge` intent
-#   - action: first_laptop_form
-#   - active_loop: first_laptop_form # recover to form after handling the interuption

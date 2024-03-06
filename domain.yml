@@ -14,6 +14,7 @@ intents:
   - buy_laptop
   - inform_laptop
   - stop
+  # - laptop_touch_screen
   
 entities: # This param is define cus: I'm using entities ie [iphone](phone)
   - phone # most be name phone
@@ -31,9 +32,9 @@ slots:
       entity: laptop_os # as defined in the entities: key
       conditions: # another unhappy path case taking care of. assuming form is not active. The word 'windows' will
 #  normally trigger inform_laptop intent, and also try to collect it slot "windows", remember inform_laptop trigers the form.
-      - active_loop: first_laptop_form #if a user chitchat with "my windows are open" we dont want bot to collect windows as a slot entity
+      - active_loop: second_laptop_form #if a user chitchat with "my windows are open" we dont want bot to collect windows as a slot entity
         requested_slot: laptop_os # What we do here is to make the slot, to be availabe only when first_laptop_form is active
-  laptop_brand:
+  laptop_brand:       # in version 3.0 we can ignore chitchat whilt filling forms with - ignore_intents: key
     type: text
     influence_conversation: true
     mappings:
@@ -45,10 +46,27 @@ slots:
     mappings:
     - type: from_entity
       entity: laptop_processor
+  laptop_touch_screen:
+    type: bool
+    influence_conversation: true
+    mappings:
+    - type: from_intent # slot val here cant be null, since an intent must be tigger
+      value: true
+      intent: affirm
+    - type: from_intent
+      value: false
+      intent: deny
 
 forms: # form themself are still actions(see that I specified them as action inside rules.yml)
-  first_laptop_form: # this was use in rule.yml
-    required_slots: # as defined in the slots: key
+  # first_laptop_form: # this was use in rule.yml
+  #   required_slots: # as defined in the slots: key
+  #     - laptop_os
+  #     - laptop_brand
+  #     - laptop_processor
+  # Anytime a form is run, it corresponding validation also run. ie validate_second_laptop_form will run without even calling it
+  second_laptop_form:
+    required_slots:
+      - laptop_touch_screen
       - laptop_os
       - laptop_brand
       - laptop_processor
@@ -109,7 +127,10 @@ actions: # All this are essentially classes from action file
   - utter_ask_laptop_brand
   - utter_ask_laptop_processor
   - utter_action_submit
-  - validate_first_laptop_form # coming from action.py
+  # - validate_first_laptop_form # coming from action.py
+  - validate_second_laptop_form
+  - action_ask_laptop_touch_screen
+ 
 
 
 session_config:

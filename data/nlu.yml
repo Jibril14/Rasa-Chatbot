@@ -128,6 +128,10 @@ nlu:
     - do you sell a laptop computer
     - can i order a computer laptop
 
+    - i'd like to buy a touch screen laptop
+    - i want to order a system with touch screen
+    - I want to buy a new laptop with screen touch
+
 - intent: inform_laptop
   examples: |
     - i'd like to buy a [windows](laptop_os) laptop 
