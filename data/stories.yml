@@ -34,9 +34,57 @@ stories:
   - intent: thanks
   - action: utter_thanks
 
-- story: order phone
+# Stories related to buying a laptop (happy path)
+- story: buy_laptop_interaction_user_happy_path
   steps:
-  - intent: order_iphone
-  - action: action_extract_iphone_entity
-  - intent: order_samsung
-  - action: action_extract_samsung_entity
+  - intent: greet
+  - action: utter_greet
+  - intent: buy_laptop
+  - action: utter_ready_help_choose_laptop
+  - intent: laptop_use
+    entities:
+      - use_for: "work"
+      - use_for: "gaming"
+      - use_for: "school"
+  - action: action_laptop_uses
+  - action: utter_laptop_budget_ask
+  - intent: laptop_budget
+  - action: action_laptop_recommend
+
+# Stories related to buying a laptop (happy path)
+- story: buy_laptop_interaction_user_happy_path
+  steps:
+  - intent: laptop_use
+    entities:
+      - use_for: "work"
+      - use_for: "gaming"
+      - use_for: "school"
+  - action: action_laptop_uses
+  - action: utter_laptop_budget_ask
+  - intent: laptop_budget
+  - action: action_laptop_recommend
+
+- story: availability_and_stock
+  steps:
+  - intent: availability_and_stock
+  - action: action_get_available_brand
+  - intent: purchase_and_Order_process
+  - action: utter_purchase_and_Order_process
+  - intent: shipping_and_delivery
+  - action: utter_shipping_and_delivery  
+
+# Individual intents with their actions
+- story: availability_and_stock
+  steps:
+  - intent: availability_and_stock
+  - action: action_get_available_brand
+
+- story: purchase_and_Order_process
+  steps:
+  - intent: purchase_and_Order_process
+  - action: utter_purchase_and_Order_process
+
+- story: shipping_and_delivery
+  steps:
+  - intent: shipping_and_delivery
+  - action: utter_shipping_and_delivery

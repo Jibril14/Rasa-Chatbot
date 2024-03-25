@@ -9,62 +9,89 @@ intents:
   - mood_unhappy
   - bot_challenge
   - thanks
-  - order_iphone
-  - order_samsung
   - buy_laptop
   - inform_laptop
-  - stop
-  
+  - laptop_use
+  - laptop_budget
+  - availability_and_stock
+  - purchase_and_Order_process
+  - shipping_and_delivery
+  - out_of_scope
+  - about_developer
+
+
 entities:
-  - phone
-  - laptop_os
-  - laptop_brand
-  - laptop_processor
+  # - laptop_os
+  # - laptop_brand
+  # - laptop_processor
+  - use_for
+  - budget
+  - query_brand
 
 slots:
-  laptop_os:
+  # laptop_os:
+  #   type: text
+  #   influence_conversation: true
+  #   mappings:
+  #   - type: from_entity
+  #     entity: laptop_os
+  #     conditions:
+  #     - active_loop: first_laptop_form
+  #       requested_slot: laptop_os
+  # laptop_brand:
+  #   type: text
+  #   influence_conversation: true
+  #   mappings:
+  #   - type: from_entity
+  #     entity: laptop_brand
+  # laptop_processor:
+  #   type: text
+  #   influence_conversation: true
+  #   mappings:
+  #   - type: from_entity
+  #     entity: laptop_processor
+  # laptop_touch_screen:
+  #   type: bool
+  #   influence_conversation: true
+  #   mappings:
+  #   - type: from_intent
+  #     value: true
+  #     intent: affirm
+  #   - type: from_intent
+  #     value: false
+  #     intent: deny
+  laptop_use:
+    type: list
+    influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: use_for
+  laptop_budget:
+    type: any
+    # influence_conversation: true
+    mappings:
+      - type: from_entity
+        entity: budget
+  query_brand:
     type: text
     influence_conversation: true
     mappings:
-    - type: from_entity
-      entity: laptop_os
-      conditions:
-      - active_loop: second_laptop_form
-        requested_slot: laptop_os
-  laptop_brand:
-    type: text
-    influence_conversation: true
-    mappings:
-    - type: from_entity
-      entity: laptop_brand
-  laptop_processor:
-    type: text
-    influence_conversation: true
-    mappings:
-    - type: from_entity
-      entity: laptop_processor
-  laptop_touch_screen:
-    type: bool
-    influence_conversation: true
-    mappings:
-    - type: from_intent
-      value: true
-      intent: affirm
-    - type: from_intent
-      value: false
-      intent: deny
+      - type: from_entity
+        entity: query_brand
 
-forms:
-  second_laptop_form:
-    required_slots:
-      - laptop_touch_screen
-      - laptop_os
-      - laptop_brand
-      - laptop_processor
+
+# forms:
+#   first_laptop_form:
+#     required_slots:
+#       - laptop_os
+#       - laptop_brand
+#       - laptop_processor
+#       - laptop_touch_screen
 
 responses:
+############################ Greetings
   utter_greet:
-  - text: "Hey! How are you?"
+  - text: "Hi! Welcome to Laptop World, your one-stop shop for all things laptops. How can I assist you today?"
 
   utter_cheer_up:
   - text: "Here is something to cheer you up:"
@@ -80,44 +107,78 @@ responses:
   - text: "Bye"
 
   utter_iamabot:
-  - text: "I am a bot, powered by Rasa."
+  - text: "I am a bot, powered by Webmonk!"
 
   utter_thanks:
   - text: "You are welcome, it was my pleasure to assist you"
 
-  utter_order_iphone:
-  - text: "Sure we sell different models of iphones. Would you like more details"
+  utter_ready_help_choose_laptop:
+  - text: "Of course! I'd be happy to help. Could you tell me a bit more about what you need the laptop for? \
+   For example, are you looking for something for work, gaming, school, or general use?"
+ 
 
-  utter_laptop_slots:
-  - text: I will order a {laptop_os} {laptop_brand} {laptop_processor} laptop.
+############################ Laptops
+  utter_laptop_use:
+  - text: "Seems you like to buy a laptop for {laptop_use}."
 
-  utter_ask_continue:
-  - text: Are you sure you want to stop the form?
+  utter_laptop_budget_ask:
+  - text: "Great, that helps narrow things down! What's your budget for the laptop (in usd)?"
 
-  utter_action_submit:
-  - text: Are you sure your selection are ok?
+  utter_recommend_laptop_if_user_give_use_and_budget:
+  - text: "I'll recommend a few options for {laptop_use} within ${budget} budget. <db object>"
 
-  utter_ask_laptop_os:
-  - text: What laptop operating system are you looking for
+  utter_recommend_laptop_if_user_give_budget:
+  - text: "I'll recommend a few options within ${budget} budget. < object>"
 
-  utter_ask_laptop_brand: 
-  - text: What laptop brand do you want to buy
+  utter_recommend_laptop_if_user_give_use:
+  - text: "I'll recommend a few options for {laptop_use}, sees. <db object>"
 
-  utter_ask_laptop_processor:
-  - text: Which processor type are you looking at (e.g intel core i5, intel core i7)
+  # go db if available come utter
+  utter_brand_availability_and_stock:
+  - text: "Yea we have a few {query_brand}, brand that wil be nice for your requirement, checkout the following <db>"
+  - text: "Sure check out the following {query_brand} brands: <db>"
+
+  utter_purchase_and_Order_process:
+  - text: "After you have reviewed the items in your Shopping Cart, proceed to checkout to complete your order.\
+  We accept (credit card, PayPal, etc.)\
+  see top selling laptops on our website <https.laptopslatest>\
+  To view your order's details, go to <https/orders>"
+
+  utter_shipping_and_delivery:
+  - text: "We have two shipping methods (standard and express). delivery time is mostly 2 days after you place a order"
+
+  utter_checkout_our_website:
+  - text: "Laptop Xpress is an online store that sells anything Laptops. check us on laptopxpress.com"
+# - - text: "Didnot quite understand your request ""
+
+  # About developer
+  utter_About_developer:
+  - text: Abdullahi Abdulwasiu is a Web-developer @Webmonk inc.
+
+# Fallbacks
+  # nlu_fallback
+  utter_please_rephrase:
+  - text: I'm sorry, I didn't quite understand that. Could you rephrase?
+
+  # Action with low confidence
+  utter_default_one:
+  - text: Sorry I didn't get that. Can you rephrase?
+  - text: Sorry I didn't get that. Can you explain better?
+
+  # # Two stage fallback
+  # utter_ask_rephrase:
+  # - text: I'm sorry, I didn't quite understand that. Could you rephrase?
+
+  # Out of scope questions
+  utter_out_of_scope:
+  - text: Sorry, I can't handle that request. Laptop Xpress only deal in Laptops!
 
 
 actions:
-  - utter_ask_continue
-  - utter_laptop_slots
-  - utter_ask_laptop_os
-  - utter_ask_laptop_brand
-  - utter_ask_laptop_processor
-  - utter_action_submit
-  - validate_second_laptop_form
-  - action_ask_laptop_touch_screen
+  - action_laptop_uses
+  - action_laptop_recommend
+  - action_get_available_brand
  
-
 session_config:
   session_expiration_time: 60
   carry_over_slots_to_new_session: true

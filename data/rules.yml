@@ -12,19 +12,34 @@ rules:
   - intent: bot_challenge
   - action: utter_iamabot
 
-- rule: Activate Laptop Form
+- rule: Force ask laptop burget
   steps:
-  - intent: buy_laptop
-  - action: second_laptop_form
-  - active_loop: second_laptop_form
+  - intent: laptop_uses
+  - action: action_laptop_uses
+  - action: utter_laptop_budget_ask
 
-- rule: Submit Laptop Form
-  condition:
-  - active_loop: second_laptop_form
+- rule: Force give laptop recommendation
   steps:
-  - action: second_laptop_form
-  - active_loop: null
-  - slot_was_set:
-    - requested_slot: null
-  - action: utter_action_submit
-  - action: utter_laptop_slots
+  - intent: laptop_budget
+  - action: action_laptop_recommend 
+
+- rule: Our Website
+  steps:
+  - intent: checkout_our_website
+  - action: utter_checkout_our_website 
+
+- rule: About Developer
+  steps:
+  - intent: about_developer
+  - action: utter_About_developer
+
+# Fallback
+- rule: Ask the user to rephrase whenever they send a message with low NLU confidence
+  steps:
+  - intent: nlu_fallback
+  - action: utter_please_rephrase
+
+- rule: out-of-scope
+  steps:
+  - intent: out_of_scope
+  - action: utter_out_of_scope
