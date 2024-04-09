@@ -33,6 +33,9 @@ rules:
   - intent: about_developer
   - action: utter_About_developer
 
+  # - intent: availability_and_stock
+  # - action: action_get_available_brand
+
 # Fallback
 - rule: Ask the user to rephrase whenever they send a message with low NLU confidence
   steps:

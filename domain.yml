@@ -18,48 +18,14 @@ intents:
   - shipping_and_delivery
   - out_of_scope
   - about_developer
-
+  - checkout_our_website
 
 entities:
-  # - laptop_os
-  # - laptop_brand
-  # - laptop_processor
   - use_for
   - budget
   - query_brand
 
 slots:
-  # laptop_os:
-  #   type: text
-  #   influence_conversation: true
-  #   mappings:
-  #   - type: from_entity
-  #     entity: laptop_os
-  #     conditions:
-  #     - active_loop: first_laptop_form
-  #       requested_slot: laptop_os
-  # laptop_brand:
-  #   type: text
-  #   influence_conversation: true
-  #   mappings:
-  #   - type: from_entity
-  #     entity: laptop_brand
-  # laptop_processor:
-  #   type: text
-  #   influence_conversation: true
-  #   mappings:
-  #   - type: from_entity
-  #     entity: laptop_processor
-  # laptop_touch_screen:
-  #   type: bool
-  #   influence_conversation: true
-  #   mappings:
-  #   - type: from_intent
-  #     value: true
-  #     intent: affirm
-  #   - type: from_intent
-  #     value: false
-  #     intent: deny
   laptop_use:
     type: list
     influence_conversation: true
@@ -78,15 +44,6 @@ slots:
     mappings:
       - type: from_entity
         entity: query_brand
-
-
-# forms:
-#   first_laptop_form:
-#     required_slots:
-#       - laptop_os
-#       - laptop_brand
-#       - laptop_processor
-#       - laptop_touch_screen
 
 responses:
 ############################ Greetings
@@ -124,6 +81,12 @@ responses:
   utter_laptop_budget_ask:
   - text: "Great, that helps narrow things down! What's your budget for the laptop (in usd)?"
 
+  utter_recommend_laptop:
+  - text: "We have various laptop products, check them out on our website <>"
+  - text: "I'll recommend a few options for {laptop_use}, see left"
+  - text: "We a few options within ${budget} budget. < object>"
+  - text: "I'll recommend a few options for {laptop_use} within ${budget} budget."
+    
   utter_recommend_laptop_if_user_give_use_and_budget:
   - text: "I'll recommend a few options for {laptop_use} within ${budget} budget. <db object>"
 
@@ -160,8 +123,8 @@ responses:
   utter_please_rephrase:
   - text: I'm sorry, I didn't quite understand that. Could you rephrase?
 
-  # Action with low confidence
-  utter_default_one:
+  # Action with low confidence. not using this yet
+  utter_default:
   - text: Sorry I didn't get that. Can you rephrase?
   - text: Sorry I didn't get that. Can you explain better?
 

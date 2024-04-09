@@ -88,3 +88,8 @@ stories:
   steps:
   - intent: shipping_and_delivery
   - action: utter_shipping_and_delivery
+
+- story: checkout_our_website
+  steps:
+  - intent: checkout_our_website
+  - action: utter_checkout_our_website

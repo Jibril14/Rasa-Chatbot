@@ -2,9 +2,8 @@ from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker, FormValidationAction
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.types import DomainDict
-
-
 import random
+
 
 def shuffle_response_template(templates):
     return random.choice(templates)
@@ -41,28 +40,28 @@ class  ActionValidateLaptopUseAndBudget(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        specify_slots = tracker.get_slot("laptop_use")
+        specify_laptop_use = tracker.get_slot("laptop_use")
         specify_budget = tracker.get_slot("laptop_budget")
-        # specify_slot = " ".join(specify_slots)
-       
-            # samsung_entity = next(tracker.get_latest_entity_values("phone"), None)
-        
-        
-        if specify_slots != None:
-            response = domain["responses"]["utter_recommend_laptop_if_user_give_use"][0]
-            response_text = response["text"].format(laptop_use=type(specify_slots))
+
+        # When both use and budget slots are absent
+        response = domain["responses"]["utter_recommend_laptop"][0]
+        response_text = response["text"]
+        if specify_laptop_use != None:
+            response = domain["responses"]["utter_recommend_laptop"][1]
+            response_text = response["text"].format(laptop_use="### ".join(specify_laptop_use))
+            # response_text = response["text"].format(laptop_use=",".join(specify_laptop_use))
         if specify_budget != None:
-            response = domain["responses"]["utter_recommend_laptop_if_user_give_budget"][0]
+            response = domain["responses"]["utter_recommend_laptop"][2]
             if int(specify_budget) < 200:
                 specify_budget = "small budget < $400"
             response_text = response["text"].format(budget=specify_budget)
-        if specify_budget and specify_slots != None:
-            for slot in specify_slots:
-                specify_slot = slot + " "
-            response = domain["responses"]["utter_recommend_laptop_if_user_give_use_and_budget"][0]
-            response_text = response["text"].format(laptop_use=specify_slot, budget=specify_budget)
-       
+        if specify_budget and specify_laptop_use != None:
+            # for slot in specify_laptop_use:
+            #     specify_use = slot + " "
+            response = domain["responses"]["utter_recommend_laptop"][3]
+            response_text = response["text"].format(laptop_use="### ".join(specify_laptop_use), budget=specify_budget)
         
+       
         dispatcher.utter_message(text=response_text)
         return []
 
@@ -89,8 +88,6 @@ class  ActionGetQueryBrand(Action):
         return []
 
 
-
-
 from rasa_sdk import Action, Tracker
 from rasa_sdk.events import UserUtteranceReverted
 from rasa_sdk.executor import CollectingDispatcher
@@ -110,8 +107,9 @@ class ActionDefaultFallback(Action):
     ) -> List[Dict[Text, Any]]:
 
         response = [ 
-            domain["responses"]["utter_default_one"][0],
-            domain["responses"]["utter_default_one"][1]
+            domain["responses"]["utter_default"][0],
+            domain["responses"]["utter_default"][1]
+            #domain["responses"]["utter_out_of_scope"][2]
         ]
         response = shuffle_response_template(response)
         dispatcher.utter_message(text=response)
