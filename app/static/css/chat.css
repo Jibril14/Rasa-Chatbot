@@ -10,6 +10,13 @@
 body {
   background: #E3F2FD;
 }
+
+.chat-us{
+  font-family: none;
+  color: #721c24;
+  padding: 3px;
+}
+
 .chatbot-toggler {
   position: fixed;
   bottom: 30px;
@@ -112,7 +119,7 @@ header h2 {
   text-align: center;
   line-height: 32px;
   align-self: flex-end;
-  background: #724ae8;
+  /* background: #724ae8; */
   border-radius: 4px;
   margin: 0 10px 7px 0;
 }

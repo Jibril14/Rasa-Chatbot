@@ -1,0 +1,102 @@
+@import url("https://fonts.googleapis.com/css?family=Ubuntu");
+
+.page-footer {
+    font-family: "Ubuntu", sans-serif;
+    height: auto;
+    margin-top: 100vh;
+    /* position: absolute;
+    top: 100vh; */
+    padding-top: 30px;
+    text-align: center;
+  }
+
+  .page-footer .footer-copyright {
+    background-color: #fff;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    text-align: center;
+    border: 1px solid #ededed;
+  }
+  
+  .page-footer.dark .footer-copyright {
+    background-color: #222425;
+    border-color: #222425;
+  }
+  
+  .page-footer .footer-copyright p {
+    margin: 10px;
+    color: #7d8288;
+  }
+  
+  .page-footer.dark .footer-copyright p {
+    color: #ccc;
+  }
+  
+  .page-footer ul {
+    list-style-type: none;
+    padding-left: 0;
+    line-height: 1.7;
+  }
+  
+  .page-footer h5 {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 30px;
+  }
+  
+  .page-footer.dark h5 {
+    color: white;
+  }
+  
+  .page-footer a {
+    color: #53595f;
+    text-decoration: none;
+  }
+  
+  .page-footer.dark a {
+    color: #ff0e0e;
+  }
+  
+  .page-footer a:hover,
+  .page-footer a:focus {
+    text-decoration: none;
+    color: #1d2125;
+  }
+  
+  .page-footer.dark a:hover,
+  .page-footer.dark a:focus {
+    color: #fff;
+  }
+  
+  @media (min-width: 576px) {
+    .page-footer {
+      text-align: left;
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .page-footer ul li {
+      position: relative;
+      padding-left: 10px;
+    }
+    .page-footer ul li:before,
+    .page-footer ul li:after {
+      content: "";
+      position: absolute;
+      left: 0;
+      width: 2px;
+      height: 6px;
+      border-radius: 2px;
+      background-color: #007bff;
+      transform: rotate(-45deg);
+    }
+    .page-footer ul li:before {
+      top: 9px;
+      transform: rotate(-45deg);
+    }
+    .page-footer ul li:after {
+      top: 13px;
+      transform: rotate(45deg);
+    }
+  }
+  

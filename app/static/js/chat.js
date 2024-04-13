@@ -3,7 +3,11 @@ const closeBtn = document.querySelector(".close-btn");
 const chatbox = document.querySelector(".chatbox");
 const chatInput = document.querySelector(".chat-input textarea");
 const sendChatBtn = document.querySelector(".chat-input span");
+const shopUi = document.querySelector(".row");
+console.log("########ShopUI",shopUi)
 
+
+let shop
 let userMessage = null;
 const inputInitHeight = chatInput.scrollHeight;
 
@@ -13,36 +17,100 @@ const createChatLi = (message, className) => {
     let chatContent = className === "outgoing" ? `<p></p>` : `<span class="material-symbols-outlined">smart_toy</span><p></p>`;
     chatLi.innerHTML = chatContent;
     chatLi.querySelector("p").textContent = message;
+    console.log("MSG",message)
     return chatLi;
 }
 
-const generateResponse = (chatElement) => {
+const generateResponse = (data) => {
+    // display thinking, when response is not there yet
+    const chatElement = createChatLi("...thinking", "incoming");
+    chatbox.appendChild(chatElement);
+    chatbox.scrollTo(0, chatbox.scrollHeight);
     const messageElement = chatElement.querySelector("p");
 
-    messageElement.textContent = "The answer is yes";
+    messageElement.textContent = data
 
     chatbox.scrollTo(0, chatbox.scrollHeight);
+}
+
+const displayShop = (data) => {
+    if(data.length != 0){  
+        shop  = document.createElement("div")
+        shop.classList.add("col")
+        for (const i of data){
+            const shop  = document.createElement("div")
+            shop.classList.add("col")
+            const card =`
+                <div id="content">
+                    <h2>See Recommended Laptops</h2>
+                    <div class="img-container1">
+                        <div class="img-container">
+                            <img src="${i.image}"  alt="" >  
+                        </div>
+                    </div>
+                    <h4 id="name">${i.name}</h4>
+                    <div class="inner-content">
+                        <p>&#36<span id="id">${i.price}</span></p>
+                        <button id="idd" class="cart-btn">Add to cart</button>
+                    </div>
+                </div>`
+          shop.innerHTML = card; 
+          shopUi.appendChild(shop)
+        }
+    } else {
+        // remove previous elements on ui
+        while (shopUi.hasChildNodes()){
+            shopUi.removeChild(shopUi.firstChild)
+        }
+    }  
 }
 
 const handleChat = () => {
     userMessage = chatInput.value.trim();
     if(!userMessage) return;
 
+    botResponse = sendMessageToServer(userMessage)
+    console.log("Bot Response", botResponse)
+    // after user enter message
     // Clear the input textarea and set its height to default
     chatInput.value = "";
     chatInput.style.height = `${inputInitHeight}px`;
 
     // Append the user's message to the chatbox
     chatbox.appendChild(createChatLi(userMessage, "outgoing"));
-    chatbox.scrollTo(0, chatbox.scrollHeight);
+    chatbox.scrollTo(0, chatbox.scrollHeight);   
+    
+}
 
-    setTimeout(() => {
-        // Display "Thinking..." message while waiting for the response
-        const incomingChatLi = createChatLi("Thinking...", "incoming");
-        chatbox.appendChild(incomingChatLi);
+
+const sendMessageToServer = (data) => {
+    
+    // send user message to server
+    // const botResponse = "Im coming from Rasa"
+    console.log("User message",data)
+    return fetch("http://127.0.0.1:8000/message", {
+        method: "POST", 
+        body: JSON.stringify({
+
+            "chatId": 1,
+            "date": "date",
+            "conversation": data
+        }),
+        headers: {
+            "Content-type": "application/json"
+        }
+    }).then(response => {   
+        return response.json()
+    }).then((data) => {
+        console.log("DATA",data)
         chatbox.scrollTo(0, chatbox.scrollHeight);
-        generateResponse(incomingChatLi);
-    }, 600);
+        generateResponse(data["message"]);
+        console.log("Extras:",data["extra"])
+        displayShop(data["extra"])
+    }
+    ).catch(
+        (err) => console.log(err)
+    )
 }
 
 chatInput.addEventListener("input", () => {
@@ -55,8 +123,10 @@ chatInput.addEventListener("keydown", (e) => {
     // If Enter key is pressed without Shift key and the window
     // width is greater than 800px, handle the chat
     if(e.key === "Enter" && !e.shiftKey && window.innerWidth > 800) {
-        e.preventDefault();
+        e.preventDefault(); // prevent expansion of textarea
         handleChat();
+        // const element = document.querySelector(".col")
+        
     }
 });
 

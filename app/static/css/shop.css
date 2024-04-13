@@ -1,0 +1,112 @@
+
+
+/**
+* Template Name: My Personal Template
+* Author: Abdullahi
+* License: free
+*/
+
+.row{
+    margin:20px auto  
+}
+.row a{
+    text-decoration:none;
+    color:inherit;  
+}
+
+.row::after {
+    content: "";
+    display: table;
+    clear: both;
+   
+}
+
+.col {
+    float: left;
+    width: 100%;
+	padding: 0 10px 50px 10px;
+}
+
+
+
+/* Content */
+#content {
+    background-color: rgb(255, 233, 233);
+    padding: 7px;
+}
+
+.img-container1{
+    width: 100%;
+    background-color: #fff;
+}
+.img-container{
+    width: 200px;
+    height: 200px; 
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.img-container img{
+    width: 100%;
+    height: 100%;
+    object-position: center center;
+    object-fit: cover;
+    
+}
+
+.inner-content {
+    margin-top: 40px;
+    padding: 0 7px;
+    display: flex;
+    justify-content: space-between;
+ 
+}
+
+.inner-content  .cart-btn{
+    background-color: purple;
+    border: none;
+    color: rgb(255, 255, 255);
+    padding: 2px 5px;
+    width: fit-content;
+    text-align: center;
+    margin: 2px;
+   transition: 0.3s ease;
+}
+
+h4, h3, h5 {
+    text-align: center;
+}
+
+.inner-content  .cart-btn:hover {
+    background-color: #55ff55;
+    color: white;
+}
+
+.paginator-container{
+    width:100%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+
+.banner{
+    display:none;
+}
+.hero-cover{
+    display:none;
+}
+
+@media (min-width: 993px) {
+
+    .col {
+        width: 24.5%;
+    }
+	
+}
+
+@media (max-width: 992px) and (min-width: 600px) {
+    .col {
+        width: 49.5%;
+    }
+}

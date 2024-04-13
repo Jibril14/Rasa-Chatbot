@@ -6,7 +6,7 @@
 
 <div class="chat-container">
     <button class="chatbot-toggler">
-        <span class="material-symbols chat-us">Chat Us</span>
+        <span class="material-symbols-rounded"><strong>Chat Us</strong></span>
         <span class="material-symbols-outlined">close</span>
       </button>
       <div class="chatbot">
@@ -26,13 +26,5 @@
           <textarea placeholder="Enter a message..." spellcheck="false" required></textarea>
           <span id="send-btn" class="material-symbols-rounded">send</span>
         </div>
-
-        <!-- <form method="post"  class="chat-input" action="/">
-       
-          <textaria placeholder="Enter a message..." spellcheck="false" name="user_msg" required></textaria>
-       
-         
-        
-        </form> -->
       </div>
 </div>

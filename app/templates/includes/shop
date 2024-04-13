@@ -1,0 +1,23 @@
+ <!-- <div class="row">	
+    <h2>All Products</h2>
+    {% for product in all_products %} 
+  
+      <div class="col">
+       
+          <div id="content">
+            <div class="img-container1">
+              <div class="img-container">
+              <img src="{{ product.Image }}"  alt="{{ product.title }}" >  
+              <img src="./img3.jpg"  alt="" >  
+              </div>
+              </div>
+              <h4 id="name">Hp envy 15</h4>
+              <div class="inner-content">
+                  <p>&#8358 <span id="pr{{product.id}}">{{product.price}}</span></p>
+                  <button id="{{product.id}}" class="cart-btn">Add to cart</button>
+              </div>
+            </div>
+      </div>
+   
+  </div>
+ -->
