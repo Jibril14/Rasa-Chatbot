@@ -1,0 +1,7 @@
+tests
+__pycache__
+.rasa
+.env
+log
+.git
+Dockerfile

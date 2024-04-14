@@ -1,0 +1,48 @@
+version: "3.1"
+
+rules:
+
+- rule: Say goodbye anytime the user says goodbye
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- rule: Say 'I am a bot' anytime the user challenges
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot
+
+- rule: Force ask laptop burget
+  steps:
+  - intent: laptop_uses
+  - action: action_laptop_uses
+  - action: utter_laptop_budget_ask
+
+- rule: Force give laptop recommendation
+  steps:
+  - intent: laptop_budget
+  - action: action_laptop_recommend 
+
+- rule: Our Website
+  steps:
+  - intent: checkout_our_website
+  - action: utter_checkout_our_website 
+
+- rule: About Developer
+  steps:
+  - intent: about_developer
+  - action: utter_About_developer
+
+  # - intent: availability_and_stock
+  # - action: action_get_available_brand
+
+# Fallback
+- rule: Ask the user to rephrase whenever they send a message with low NLU confidence
+  steps:
+  - intent: nlu_fallback
+  - action: utter_please_rephrase
+
+- rule: out-of-scope
+  steps:
+  - intent: out_of_scope
+  - action: utter_out_of_scope

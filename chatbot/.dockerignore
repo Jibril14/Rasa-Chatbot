@@ -1,0 +1,10 @@
+models/*
+actions/*
+tests/*
+__pycache__
+venv
+.rasa
+.env
+log
+.gitignore
+Dockerfile
