@@ -1,14 +1,22 @@
 Rasa Chatbot
 
+# I Change my folder structure at this point (In preparation to dockerise this project)
+# at this point my rasa project is half dockerise ie the chat interactive endpoint is dockerise remaining the action server
 
-## Runing the project at this point (ie the Rasa part only to see Rasa form in action)
-- Navigate to project root directory and run:
-- `pip install -r requirements.txt`
-cmd
-open two terminal for Rasa action & Rasa interaction
-- `rasa run actions`
-- `rasa interactive`
 
-- rasa run actions: Starts an action server using the Rasa SDK
-- rasa interactive: Starts an interactive learning session and chatting to your assistant.
+## steps
+- inside chatbot folder I added a dockerfile, which is the main instruction at this point, cus I am yet to use volume
+- I will later use docker compose & volume for easy command and to persist data
+- Inside the dockerfile i pull the official rasa image, I commented out requirements.txt wanted to pull python:3.9 
+- base image and build my own rasa image from scratch but later decided to use the official Image cus of easy use
+- and some basic configuration for models volume
+- docker build -t chitchat . # Chitchat is what I name my image (ie rasa base image & my files)
+- docker run --name myrasachatbot --rm -p 8000:5005 chitchat # create my container and expose port 5005 to reach it
+- Was able to reach rasa endpoint from my fastapi through: http://localhost:8000/webhooks/rest/webhook
+- chat everything still work fine except rasa action server, which I'm yet to configure
+- http://localhost:8000/version : a get request from browser to my docker container still work
+- hard refresh the fastapi browser to ensure it point to the chat endpoint
+- at this point the models train and sit fine in the container
+- this is a workable dockerization steps for the interactive chat endpoint, though without using docker compose
 
+## Above steps are reference for future purpose
