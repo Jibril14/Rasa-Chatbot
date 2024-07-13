@@ -33,7 +33,8 @@ def create_dialog():
 # send chat from app to rasa server and get response
 def rasa_response(message):       
     payload = {"message": message} #
-    req = requests.post("http://localhost:5005/webhooks/rest/webhook", json=payload)
+    # http://localhost:5050/webhooks/rest/webhook for local dev
+    req = requests.post("http://localhost:8000/webhooks/rest/webhook", json=payload)
     texts = [] # Bot may reply with list of strings
     for text in req.json():
       texts.append(text["text"])

@@ -297,6 +297,7 @@ nlu:
     - What are some practical tips for decluttering my home?
     - How do I improve my listening skills?
     - Are you a Nigerian?
+    - I mean apart from laptop what other things do you sell?
 
 - intent: about_developer
   examples: |

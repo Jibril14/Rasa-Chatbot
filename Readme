@@ -19,4 +19,26 @@ Rasa Chatbot
 - at this point the models train and sit fine in the container
 - this is a workable dockerization steps for the interactive chat endpoint, though without using docker compose
 
+
+## Dockerizing the action server
+- A basic configuration for Rasa action server dockerization (without using auth, compose file etc)
+- I use the dockerfile inside of the actions folder
+- first I pull the base Image rasa/rasa-sdk:3.7.0 from docker hub, though version should have been 3.6 to match rasa
+- add my action file, my action server does not have any other requirement apart from rasa sdk
+- I expose port 5055 and spine up a container
+- docker build -t rasa-action .
+- docker run --name actions --rm -p 5055:5055 rasa-action
+- docker container inspect actions
+- after running : docker container inspect actions
+- I figured this container will listen to IP address from 172.17.0.3
+- That means for my chat container to communicate with this actions server container
+- I have to change the action_endpoint inside endpoint file to http://172.17.0.3:5055/webhook
+- This mean I had to rebuild another chat image, cus of the changes to my code
+- By chat image or chat container, I mean my rasa codes (nlu, domain, story files) apart from actions folder
+- this setup means I now have two docker containers that communicate with each other
+- my rasa chatbot now work perfectly fine, I havent dockerize my fastapi yet, but still able to
+- talk to the containers. Everything work fine at this point
+- next will be to use compose for a more elegant setup
+- also dockerize my fastapi and it database
+
 ## Above steps are reference for future purpose

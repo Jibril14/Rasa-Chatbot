@@ -1,13 +1,15 @@
-FROM python:3.9
+FROM rasa/rasa-sdk:3.7.0
 
 WORKDIR /app
 
-COPY requirements.txt .
+# COPY requirements.txt .
 
-RUN pip install --verbose -r requirements.txt
+# RUN pip install --verbose -r requirements.txt
 
 COPY . .
 
+# USER root
+
 EXPOSE 5055
 
-USER 1001
+# USER 1001
