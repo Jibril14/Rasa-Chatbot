@@ -1,0 +1,24 @@
+version: "3.8"
+services:
+  rasa:
+    container_name: "rasa_server"
+    user: root
+    build: 
+      context:  ./chatbot
+    volumes:
+    - "./chatbot:/app"
+    ports: 
+      - "8000:5005"
+  action_server:
+    container_name: "action_server"
+    build: 
+      context: ./chatbot/actions
+    volumes:
+      - ./chatbot/actions:/app/actions
+      - ./chatbot/data:/app/data
+    ports:
+      - 5055:5055
+
+
+
+# docker-compose up -d --build

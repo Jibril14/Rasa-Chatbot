@@ -41,4 +41,8 @@ Rasa Chatbot
 - next will be to use compose for a more elegant setup
 - also dockerize my fastapi and it database
 
+## Using Docker compose to setup rasa_server and action_server
+- I now have a docker compose file which setup my rasa chatbot (rasa_server and action_server)
+- Everything work fine and still connect to my fastapi app
+
 ## Above steps are reference for future purpose
