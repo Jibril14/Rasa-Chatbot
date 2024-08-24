@@ -22,3 +22,9 @@ class ChatBase(BaseModel):
     date: str # datetime.datetime
     conversation: str
 
+class ChatDisplay(BaseModel):
+    chatId : int
+    date: str
+    conversation: str
+    class Config():
+        orm_mode = True

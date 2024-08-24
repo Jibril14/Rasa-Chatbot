@@ -1,0 +1,9 @@
+chatbot/*
+actions/*
+tests/*
+__pycache__/*
+venv
+log
+.gitignore
+Dockerfile
+MYDOC/*

@@ -1,6 +1,7 @@
 models
 actions/*
 tests/*
+MYDOC/*
 __pycache__
 venv
 .rasa

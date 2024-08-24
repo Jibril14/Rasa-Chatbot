@@ -3,7 +3,7 @@ from typing import List
 from fastapi import APIRouter, FastAPI, Request, Depends, Form
 from fastapi.responses import HTMLResponse
 from fastapi.templating import Jinja2Templates
-from db_schema.schemas import LaptopBase, LaptopDisplay, ChatBase
+from db_schema.schemas import LaptopBase, LaptopDisplay, ChatBase, ChatDisplay
 from db.models import Laptop, Chat
 from db.database import get_db, SessionLocal
 from sqlalchemy.orm.session import Session 
@@ -18,23 +18,22 @@ template = Jinja2Templates(directory="app/templates")
 
 chatbot_user_dialog = []
 
-def create_dialog():
-    db : Session = SessionLocal()
-    now = datetime.datetime.now()
-    new_chat = Chat(
-        date = str(now),
-        conversation = str(chatbot_user_dialog)
-    )
-    db.add(new_chat)
-    db.commit()
-    db.refresh(new_chat)
+# def create_dialog():
+#     db : Session = SessionLocal()
+#     now = datetime.datetime.now()
+#     new_chat = Chat(
+#         date = str(now),
+#         conversation = str(chatbot_user_dialog)
+#     )
+#     db.add(new_chat)
+#     db.commit()
+#     db.refresh(new_chat)
 
 
 # send chat from app to rasa server and get response
 def rasa_response(message):       
-    payload = {"message": message} #
-    # http://localhost:5050/webhooks/rest/webhook for local dev
-    req = requests.post("http://localhost:8000/webhooks/rest/webhook", json=payload)
+    payload = {"message": message}
+    req = requests.post("http://rasa_server:5005/webhooks/rest/webhook", json=payload)
     texts = [] # Bot may reply with list of strings
     for text in req.json():
       texts.append(text["text"])
@@ -43,7 +42,7 @@ def rasa_response(message):
     chatbot_user_dialog.append((user_msg, chatbot_msg))
     # check for slots in convo text, use this to query db for the laptop that have slot 
     check_slot(" ".join(texts))
-    create_dialog()
+    # create_dialog()
     return " ".join(texts)
 
 
@@ -119,6 +118,6 @@ async def create_chat(request: ChatBase, db: Session = Depends(get_db)):
     return views.create_chat(db, request)
 
 
-@router.get("/all/chat")
+@router.get("/all/chat",response_model=List[ChatDisplay])
 async def get_chats(db: Session = Depends(get_db)):
     return views.get_all_chat(db)
