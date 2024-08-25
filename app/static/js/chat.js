@@ -14,7 +14,9 @@ const inputInitHeight = chatInput.scrollHeight;
 const createChatLi = (message, className) => {
     const chatLi = document.createElement("li");
     chatLi.classList.add("chat", `${className}`);
-    let chatContent = className === "outgoing" ? `<p></p>` : `<span class="material-symbols-outlined">smart_toy</span><p></p>`;
+    let chatContent = className === "outgoing" ? `<p></p>` : `<span class="material-symbols-outlined">
+    <img src="https://res.cloudinary.com/webmonc/image/upload/v1696515089/7626850_ppkstm.png" width="24" height="28" alt="bot">
+    </span><p></p>`;
     chatLi.innerHTML = chatContent;
     chatLi.querySelector("p").textContent = message;
     console.log("MSG",message)
@@ -42,7 +44,6 @@ const displayShop = (data) => {
             shop.classList.add("col")
             const card =`
                 <div id="content">
-                    <h2>See Recommended Laptops</h2>
                     <div class="img-container1">
                         <div class="img-container">
                             <img src="${i.image}"  alt="" >  

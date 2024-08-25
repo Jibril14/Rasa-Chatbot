@@ -1,6 +1,8 @@
 from sqlalchemy.sql.sqltypes import Integer, String, Float
-from db.database import Base
 from sqlalchemy import Column
+from sqlalchemy.ext.declarative import declarative_base
+
+Base = declarative_base()
 
 
 class Laptop(Base):
