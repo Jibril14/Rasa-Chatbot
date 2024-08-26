@@ -159,6 +159,8 @@ nlu:
     - Do you have [hp elitebook](query_brand) available?
     - which [hp](query_brand) laptop is good for programming?
     - Is [hp](query_brand) a good brand of laptop?
+    - let me see the [hp](query_brand) laptops that you have
+    - let me see all available good [hp](query_brand) laptops
     - Do you have [asus rog ranger](query_brand) laptop in stock?
     - is [asus](query_brand) a good brand of laptop?
     - Do you have [dell latitude](query_brand) in stock?
@@ -167,6 +169,7 @@ nlu:
     - Do you have [lenovo](query_brand) laptops in stock?
     - what [lenovo](query_brand) brand is available?
     - Do you have [lenovo thinkpad](query_brand) in stock?
+
 
 # Purchase and Order Process (Instructions on how to order a laptop)
 - intent: purchase_and_Order_process

@@ -7,9 +7,29 @@ import random
 
 def shuffle_response_template(templates):
     return random.choice(templates)
-    
 
-class  ActionValidateSlot(Action): 
+
+class  ActionUtterHelpMessage(Action):
+
+    def name(self) -> Text:
+        return "action_utter_help_message"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        response = [
+            domain["responses"]["utter_ready_help_choose_laptop"][0],
+            domain["responses"]["utter_ready_help_choose_laptop"][1]
+        ]
+        print("Gotten-response", response)
+        response = shuffle_response_template(response)
+        print("Gotten-response", response["text"])
+        dispatcher.utter_message(text=response["text"])
+        return []
+
+
+class  ActionValidateLaptopUse(Action): 
 
     def name(self) -> Text:
         return "action_laptop_uses"
@@ -22,12 +42,13 @@ class  ActionValidateSlot(Action):
 
         if specify_slots != None:
             specify_slot = " ".join(specify_slots)
-
+            if len(specify_slots) > 1:
+                specify_slot = " and ".join(specify_slots)
             response = domain["responses"]["utter_laptop_use"][0]
             response_text = response["text"].format(laptop_use=specify_slot)
             dispatcher.utter_message(text=response_text)
         else:
-            dispatcher.utter_message(text=f"We have some good products checkout: <DB data latest product>")
+            dispatcher.utter_message(text=f"We have some good products checkout our website")
         return []
 
 
@@ -60,12 +81,11 @@ class  ActionValidateLaptopUseAndBudget(Action):
             #     specify_use = slot + " "
             response = domain["responses"]["utter_recommend_laptop"][3]
             response_text = response["text"].format(laptop_use="### ".join(specify_laptop_use), budget=specify_budget)
-        
        
         dispatcher.utter_message(text=response_text)
         return []
 
-
+##### test
 class  ActionGetQueryBrand(Action): 
     """Get user query for a particullar brand"""
     def name(self) -> Text:
@@ -74,16 +94,18 @@ class  ActionGetQueryBrand(Action):
     def run(self, dispatcher: CollectingDispatcher,
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-        
+
+        specify_query_brand = tracker.get_slot("query_brand")
+
         response = [
             domain["responses"]["utter_brand_availability_and_stock"][0],
             domain["responses"]["utter_brand_availability_and_stock"][1]
         ]
         response = shuffle_response_template(response)
-        specify_brand = tracker.get_slot("query_brand")
         response_text = response["text"].format(query_brand="")
-        if specify_brand != None:
-            response_text = response["text"].format(query_brand=specify_brand)
+        if specify_query_brand != None:
+            response_text = response["text"].format(query_brand="### ".join(specify_query_brand))   
+        
         dispatcher.utter_message(text=response_text)
         return []
 

@@ -1,0 +1,17 @@
+Of course! I'd be happy to help. Could you tell me a bit more about what you need the laptop for?
+For example, are you looking for something for work, gaming, school, or general use?
+
+
+Ok, are you looking for something for work, gaming, school, or general use?
+
+  - text: "We have various laptop products, check them out on our website <>"
+  - text: "I'll recommend a few options for {laptop_use}, see left"
+  - text: "We a few options within ${budget} budget. < object>"
+  - text: "I'll recommend a few options for {laptop_use} within ${budget} budget."
+
+
+I'll recommend a few options for work within $300 budget.
+
+
+Of course! I'd be happy to help. Could you tell me a bit more about what you need the laptop for?
+ For example, are you looking for something for work, gaming, school, or general use?

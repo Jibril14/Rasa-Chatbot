@@ -40,7 +40,7 @@ stories:
   - intent: greet
   - action: utter_greet
   - intent: buy_laptop
-  - action: utter_ready_help_choose_laptop
+  - action: action_utter_help_message
   - intent: laptop_use
     entities:
       - use_for: "work"

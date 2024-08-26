@@ -71,8 +71,8 @@ responses:
 
   utter_ready_help_choose_laptop:
   - text: "Of course! I'd be happy to help. Could you tell me a bit more about what you need the laptop for? \
-   For example, are you looking for something for work, gaming, school, or general use?"
- 
+For example, are you looking for something for work, gaming, school, or general use?"
+  - text: "Okay, are you looking for something for work, gaming, school, or general use?"
 
 ############################ Laptops
   utter_laptop_use:
@@ -87,15 +87,6 @@ responses:
   - text: "We a few options within ${budget} budget. < object>"
   - text: "I'll recommend a few options for {laptop_use} within ${budget} budget."
     
-  utter_recommend_laptop_if_user_give_use_and_budget:
-  - text: "I'll recommend a few options for {laptop_use} within ${budget} budget. <db object>"
-
-  utter_recommend_laptop_if_user_give_budget:
-  - text: "I'll recommend a few options within ${budget} budget. < object>"
-
-  utter_recommend_laptop_if_user_give_use:
-  - text: "I'll recommend a few options for {laptop_use}, sees. <db object>"
-
   # go db if available come utter
   utter_brand_availability_and_stock:
   - text: "Yea we have a few {query_brand}, brand that wil be nice for your requirement, checkout the following <db>"
@@ -138,6 +129,7 @@ responses:
 
 
 actions:
+  - action_utter_help_message
   - action_laptop_uses
   - action_laptop_recommend
   - action_get_available_brand
