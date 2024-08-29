@@ -1,48 +1,34 @@
-Rasa Chatbot
+# Rasa Chatbot: E-commerce Rasa Chatbot for Laptop Recommendations
 
-# I Change my folder structure at this point (In preparation to dockerise this project)
-# at this point my rasa project is half dockerise ie the chat interactive endpoint is dockerise remaining the action server
-
-
-## steps
-- inside chatbot folder I added a dockerfile, which is the main instruction at this point, cus I am yet to use volume
-- I will later use docker compose & volume for easy command and to persist data
-- Inside the dockerfile i pull the official rasa image, I commented out requirements.txt wanted to pull python:3.9 
-- base image and build my own rasa image from scratch but later decided to use the official Image cus of easy use
-- and some basic configuration for models volume
-- docker build -t chitchat . # Chitchat is what I name my image (ie rasa base image & my files)
-- docker run --name myrasachatbot --rm -p 8000:5005 chitchat # create my container and expose port 5005 to reach it
-- Was able to reach rasa endpoint from my fastapi through: http://localhost:8000/webhooks/rest/webhook
-- chat everything still work fine except rasa action server, which I'm yet to configure
-- http://localhost:8000/version : a get request from browser to my docker container still work
-- hard refresh the fastapi browser to ensure it point to the chat endpoint
-- at this point the models train and sit fine in the container
-- this is a workable dockerization steps for the interactive chat endpoint, though without using docker compose
+![RasaChatbot](https://res.cloudinary.com/webmonc/image/upload/v1729284928/samples/Git%20Readme%20Images/sample_yh0ihi.png)
 
 
-## Dockerizing the action server
-- A basic configuration for Rasa action server dockerization (without using auth, compose file etc)
-- I use the dockerfile inside of the actions folder
-- first I pull the base Image rasa/rasa-sdk:3.7.0 from docker hub, though version should have been 3.6 to match rasa
-- add my action file, my action server does not have any other requirement apart from rasa sdk
-- I expose port 5055 and spine up a container
-- docker build -t rasa-action .
-- docker run --name actions --rm -p 5055:5055 rasa-action
-- docker container inspect actions
-- after running : docker container inspect actions
-- I figured this container will listen to IP address from 172.17.0.3
-- That means for my chat container to communicate with this actions server container
-- I have to change the action_endpoint inside endpoint file to http://172.17.0.3:5055/webhook
-- This mean I had to rebuild another chat image, cus of the changes to my code
-- By chat image or chat container, I mean my rasa codes (nlu, domain, story files) apart from actions folder
-- this setup means I now have two docker containers that communicate with each other
-- my rasa chatbot now work perfectly fine, I havent dockerize my fastapi yet, but still able to
-- talk to the containers. Everything work fine at this point
-- next will be to use compose for a more elegant setup
-- also dockerize my fastapi and it database
 
-## Using Docker compose to setup rasa_server and action_server
-- I now have a docker compose file which setup my rasa chatbot (rasa_server and action_server)
-- Everything work fine and still connect to my fastapi app
+---
 
-## Above steps are reference for future purpose
+[Source Code: https://github.com/Jibril14/Rasa-Chatbot ](https://github.com/Jibril14/Rasa-Chatbot)
+
+---
+
+## E-commerce Rasa Chatbot for Laptop Recommendations
+
+---
+
+This project involves the development of an intelligent e-commerce chatbot using Rasa that serves as a user assistant for an online laptop store. The chatbot interacts with users to understand their preferences and recommends laptops based on a preference model and price. It queries the website’s database to retrieve the most suitable laptop options in real time.
+
+The chatbot is built using Python and FastAPI to manage API endpoints and facilitate communication between the chatbot and the database. All chat dialogs are stored in a PostgreSQL database for future analysis and improvement of the chatbot's performance.
+
+This project is containerized using Docker, with both the Rasa chatbot and the API server running as Docker images. Docker Compose orchestrates the deployment, ensuring seamless scalability and maintenance.
+
+
+## Features:
+
+- **Rasa Chatbot: User Assistance & Recommendations**: Goal-oriented and conversational app, Provides personalized laptop recommendations based on user preferences.
+- **Custom Actions**: Aid bot to execute, actions eg API calls, database interactions, etc.
+- **Natural Language Understanding (NLU)**: Intent Recognition and Entity Extraction
+- **FastAPI & Rasa Integration**: Handles interaction between the chatbot and the server using Python’s FastAPI framework.
+- **Pydantic**: For data validation and serialization.
+- **SQLAlchemy**: Use for connecting with the database, (save chats, query laptops objects)
+- **PostgreSQL**:, Relational database management system (RDBMS) for storing Laptop object and dialog session
+- **Fully Containerized**: The entire application is packaged using Docker and managed with Docker Compose for easy deployment. 
+
