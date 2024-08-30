@@ -2,6 +2,9 @@ from typing import Any, Text, Dict, List
 from rasa_sdk import Action, Tracker, FormValidationAction
 from rasa_sdk.executor import CollectingDispatcher
 from rasa_sdk.types import DomainDict
+from rasa_sdk import Action, Tracker
+from rasa_sdk.events import UserUtteranceReverted
+from rasa_sdk.executor import CollectingDispatcher
 import random
 
 
@@ -22,9 +25,7 @@ class  ActionUtterHelpMessage(Action):
             domain["responses"]["utter_ready_help_choose_laptop"][0],
             domain["responses"]["utter_ready_help_choose_laptop"][1]
         ]
-        print("Gotten-response", response)
         response = shuffle_response_template(response)
-        print("Gotten-response", response["text"])
         dispatcher.utter_message(text=response["text"])
         return []
 
@@ -68,24 +69,22 @@ class  ActionValidateLaptopUseAndBudget(Action):
         response = domain["responses"]["utter_recommend_laptop"][0]
         response_text = response["text"]
         if specify_laptop_use != None:
+            slt = [i + '###' for i in specify_laptop_use]
             response = domain["responses"]["utter_recommend_laptop"][1]
-            response_text = response["text"].format(laptop_use="### ".join(specify_laptop_use))
-            # response_text = response["text"].format(laptop_use=",".join(specify_laptop_use))
+            response_text = response["text"].format(laptop_use=" ".join(slt))
+
         if specify_budget != None:
             response = domain["responses"]["utter_recommend_laptop"][2]
             if int(specify_budget) < 200:
                 specify_budget = "small budget < $400"
             response_text = response["text"].format(budget=specify_budget)
         if specify_budget and specify_laptop_use != None:
-            # for slot in specify_laptop_use:
-            #     specify_use = slot + " "
             response = domain["responses"]["utter_recommend_laptop"][3]
-            response_text = response["text"].format(laptop_use="### ".join(specify_laptop_use), budget=specify_budget)
-       
+            response_text = response["text"].format(laptop_use="".join(slt), budget=specify_budget)
         dispatcher.utter_message(text=response_text)
         return []
 
-##### test
+
 class  ActionGetQueryBrand(Action): 
     """Get user query for a particullar brand"""
     def name(self) -> Text:
@@ -109,10 +108,6 @@ class  ActionGetQueryBrand(Action):
         dispatcher.utter_message(text=response_text)
         return []
 
-
-from rasa_sdk import Action, Tracker
-from rasa_sdk.events import UserUtteranceReverted
-from rasa_sdk.executor import CollectingDispatcher
 
 class ActionDefaultFallback(Action):
     """Executes the fallback action and goes back to the previous state
